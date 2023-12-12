@@ -16,6 +16,8 @@ def ausgabe():
 
 
 def umbenennen():
+    new_name = "Berichtsheft_2023_KW XY_Anatoliy_Danilov"
+
     # Durchlaufe und nummeriere die Dateien in der Liste durch
     for index, name in enumerate(file_liste):
         # Die Nummerierung soll mit einer 1 beginnen, anstatt mit 0.
@@ -25,12 +27,13 @@ def umbenennen():
         if len(str(index)) == 1:
             index = f"0{index}"
 
+        kw = index
+
         # Umbenennung der Dateien
-        os.rename(os.path.join(pfad, name), os.path.join(pfad, f"{index}_{name}"))
+        os.rename(os.path.join(pfad, name), os.path.join(pfad, f"Berichtsheft_2023_KW {kw}_Anatoliy_Danilov"))
 
         # Durchnummerierte Ausgabe der Dateien
-        print("Nr.:", index, " | ", "Dateiname:", name)
+        print("New_Dateiname:", name)
 
 
-ausgabe()
-# umbenennen()
+umbenennen()
