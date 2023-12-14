@@ -1,39 +1,39 @@
 # Modul zum Operieren mit dem Operation System
 import os
+import time
 
-# Pfad zum Ordner, wo sich dateien zum unebenen Befinden
-pfad = "C:\\Users\\ARHITEKTOR\\Desktop\\BERICHTSHEFT"
+# Pfad zum Ordner der Dateien die Umbenannt werden müssen
+pfad = "C:\\Users\\ARHITEKTOR\\Desktop\\Berichtsheft 2022"
 
 # Dateien in im angegeben Ordner durchlaufen und in der Liste Speichern
 file_liste = os.listdir(pfad)
 
 
-def ausgabe():
-    # Durchlaufe und nummeriere die Dateien in der Liste durch
-    for name in file_liste:
-        # Durchnummerierte Ausgabe der Dateien
-        print("Dateiname: | ", name)
-
-
 def umbenennen():
-    new_name = "Berichtsheft_2023_KW XY_Anatoliy_Danilov"
+    for file_name in file_liste:
+        # Extrahiere die KW-Woche aus dem Dateinamen
+        kw = file_name[40:44]
 
-    # Durchlaufe und nummeriere die Dateien in der Liste durch
-    for index, name in enumerate(file_liste):
-        # Die Nummerierung soll mit einer 1 beginnen, anstatt mit 0.
-        index = index + 1
+        # Extrahiere den Dateityp (Dateiendung) aus dem ursprünglichen Dateinamen
+        dateityp = os.path.splitext(file_name)[1]
 
-        # Führende Null hinzufügen, wenn der Index nur eine Ziffer hat
-        if len(str(index)) == 1:
-            index = f"0{index}"
+        # Neuer Dateiname
+        new_file_name = f"Berichtsheft_2022 {kw}_Anatoliy_Danilov{dateityp}"
+        # Überprüfe, ob die Datei bereits existiert
+        if not os.path.exists(os.path.join(pfad, new_file_name)):
+            # Umbenennung der Dateien
+            os.rename(os.path.join(pfad, file_name), os.path.join(pfad, new_file_name))
+        else:
+            print(f"Die Datei {new_file_name} existiert bereits.")
+    print("Dateien wurden erfolgreich umbenannt!")
 
-        kw = index
 
-        # Umbenennung der Dateien
-        os.rename(os.path.join(pfad, name), os.path.join(pfad, f"Berichtsheft_2023_KW {kw}_Anatoliy_Danilov"))
-
-        # Durchnummerierte Ausgabe der Dateien
-        print("New_Dateiname:", name)
+def ausgabe():
+    # Durchlaufe der Liste durch
+    for file_name in file_liste:
+        print("Dateiname: | ", file_name)
 
 
 umbenennen()
+time.sleep(5)
+ausgabe()
