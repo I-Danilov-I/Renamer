@@ -20,7 +20,7 @@ def umbenennen():
             # Umbenennung der Dateien
             os.rename(os.path.join(pfad, file_name), os.path.join(pfad, new_file_name))
         else:
-            print(f"Die Datei {new_file_name} existiert bereits.")
+            print(f"Datei: {new_file_name} existiert bereits!")
     print("Dateien wurden erfolgreich umbenannt!")
 
 
@@ -34,7 +34,11 @@ def ausgabe():
 
 
 # Pfad zum Ordner der Dateien die Umbenannt werden müssen
-pfad = "C:\\Users\\ARHITEKTOR\\Desktop\\Berichtsheft 2023"
+pfad = "C:\\Users\\ARHITEKTOR\\Desktop\\Berichtsheft"
 
-umbenennen()
-ausgabe()
+
+try:
+    umbenennen()
+    ausgabe()
+except FileNotFoundError:
+    print(f"Das System kann den angegebenen Pfad nicht finden:", pfad)
